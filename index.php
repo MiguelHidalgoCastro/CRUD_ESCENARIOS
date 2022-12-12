@@ -55,23 +55,42 @@ try {
 	}
 
 	//si no pide controlador, le mando al cuerno
+
 	if (count($pathParams) < 2) {
 		header('Location: index.html');
+		//var_dump($pathParams);
 		die();
 	}
+
+
+
 	//Leemos el controlador. Hemos acordado que estará en el primer parámetro de Path
 	$controlador = $pathParams[1];
+
+	//para cuando no quiera que se vea index.php
+	/*
+	if (isset($pathParams[0]))
+		$controlador = $pathParams[1];
+	else
+		$controlador = 'inicio';
+	*/
 
 	//Leemos los parámetros de consulta
 	$queryParams = null;
 	parse_str($_SERVER['QUERY_STRING'], $queryParams);
 
 	//Leemos el body (AJAX con JSON)
-	$body = json_decode(file_get_contents('php://input'));
+	//$body = json_decode(file_get_contents('php://input'));
 
 
 	//Cargamos el controlador
 	switch ($controlador) {
+			/*
+		case 'inicio':
+			require_once('index.html');
+			die();
+			break;
+			*/
 		case 'login':
 			require_once($config['path_controladores'] . 'login.php');
 			$controlador = new ControladorLogin();
@@ -79,15 +98,10 @@ try {
 		case 'cliente':
 			require_once($config['path_controladores'] . 'cliente.php');
 			$controlador = new ControladorCliente($config);
-			//$controlador->get();
 			break;
-			/**
-			 * ADD
-			 */
 		case 'escenario':
 			require_once($config['path_controladores'] . 'escenario.php');
 			$controlador = new ControladorEscenario($config);
-			echo $controlador;
 			break;
 		default:
 			header('HTTP/1.1 501 Not Implemented');

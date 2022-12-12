@@ -1,16 +1,21 @@
 <?php
 
-class Escenario extends ConfigDB
+//class Escenario extends ConfigDB
+class Escenario
 {
     public $id;
     public $nombre;
-    
+   
+
+    public function __construct()
+    {
+        $this->conexion = new mysqli("2daw.esvirgua.com", "user2daw_06", "6F.Z@GPTwB!s", "user2daw_BD2-06");
+        $this->conexion->set_charset('utf8');
+    }
 
     public function getAll()
     {
-        $conexion = $this->conexion;
-        $datos = $conexion->query("SELECT * FROM escenarios"); //prepare cuando sea losotros con filtros
-        //print_r($datos);
+        $datos = $this->conexion->query("SELECT * FROM escenarios"); //prepare cuando sea losotros con filtros
         return $datos;
     }
 

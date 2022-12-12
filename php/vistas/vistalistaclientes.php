@@ -11,7 +11,6 @@ class VistaListaClientes
 	{
 		require_once($this->configuracion['path_html'] . 'cabecera.html');
 		require_once($this->configuracion['path_html'] . 'listaclientes.html');
-		echo "hola";
 	}
 	function mostrar($datos)
 	{
@@ -21,7 +20,7 @@ class VistaListaClientes
 		$doc->loadHTMLFile($this->configuracion['path_html'] . 'plantilla.html');
 
 		$p = $doc->getElementById('p1');
-		$p->appendChild($doc->createTextNode('Añadido directamente' . $datos));
+		$p->appendChild($doc->createTextNode('Añadido directamente'));
 
 		echo $doc->saveHTML();
 	}
