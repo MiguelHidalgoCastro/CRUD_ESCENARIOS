@@ -80,7 +80,7 @@ try {
 	parse_str($_SERVER['QUERY_STRING'], $queryParams);
 
 	//Leemos el body (AJAX con JSON)
-	//$body = json_decode(file_get_contents('php://input'));
+	$body = json_decode(file_get_contents('php://input'));
 
 
 	//Cargamos el controlador
